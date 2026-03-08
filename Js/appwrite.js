@@ -3,7 +3,7 @@
 // ============================================================
 
 const APPWRITE_ENDPOINT = 'https://cloud.appwrite.io/v1';
-const APPWRITE_PROJECT_ID = 'YOUR_PROJECT_ID'; // Replace with your Appwrite Project ID
+const APPWRITE_PROJECT_ID = '69ad7512002b8c120c56'; // Replace with your Appwrite Project ID
 const DATABASE_ID = 'shopx-db';
 
 // Collection IDs
