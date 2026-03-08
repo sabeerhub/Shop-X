@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout — shop-X</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/Css/style.css">
+  <link rel="stylesheet" href="/Css/components.css">
 </head>
 <body>
 
@@ -93,18 +93,18 @@
 </footer>
 
 <script type="module">
-  import { initAuth } from '/js/auth.js';
-  import { renderCheckoutPage } from '/js/checkout.js';
-  import { getCart, updateCartBadge } from '/js/cart.js';
-  import { setupStickyHeader } from '/js/ui.js';
+  import { initAuth } from '/Js/auth.js';
+  import { renderCheckoutPage } from '/Js/checkout.js';
+  import { getCart, updateCartBadge } from '/Js/cart.js';
+  import { setupStickyHeader } from '/Js/ui.js';
 
   async function init() {
     setupStickyHeader();
     const user = await initAuth();
     if (!user) { window.location.href = '/login.html?redirect=/checkout.html'; return; }
-    const { getCart } = await import('/js/cart.js');
+    const { getCart } = await import('/Js/cart.js');
     const cart = await getCart(user.$id);
-    const { updateCartBadge } = await import('/js/ui.js');
+    const { updateCartBadge } = await import('/Js/ui.js');
     updateCartBadge(cart.count);
     await renderCheckoutPage(user);
   }
