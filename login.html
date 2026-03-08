@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — shop-X</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-logo">shop<span>X</span></div>
+    <p class="auth-subtitle">Welcome back! Sign in to your account.</p>
+
+    <form id="login-form">
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" name="email" class="form-input" required placeholder="you@example.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input type="password" name="password" class="form-input" required placeholder="Your password" autocomplete="current-password">
+      </div>
+      <div class="form-error" id="form-error"></div>
+      <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:8px">Sign In</button>
+    </form>
+
+    <div class="auth-switch">
+      Don't have an account? <a href="/register.html">Create one →</a>
+    </div>
+    <div class="auth-switch" style="margin-top:8px">
+      <a href="/index.html">← Back to Store</a>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { getCurrentUser } from '/js/appwrite.js';
+  import { setupLoginForm } from '/js/auth.js';
+
+  // Redirect if already logged in
+  getCurrentUser().then(user => {
+    if (user) window.location.href = '/index.html';
+  });
+
+  setupLoginForm('login-form');
+</script>
+</body>
+</html>

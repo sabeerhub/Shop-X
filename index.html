@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>shop-X — Shop Everything</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+
+<!-- Promo Banner -->
+<div class="promo-banner">🎉 Free shipping on orders over $50 — <a href="/products.html">Shop Now</a></div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/index.html" class="logo">shop<span>X</span></a>
+      <div class="header-search">
+        <input type="text" id="header-search-input" placeholder="Search for products, brands and more..." autocomplete="off">
+        <button class="search-btn" id="header-search-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+      </div>
+      <nav class="header-nav">
+        <a href="/products.html"><span class="nav-label">Products</span></a>
+        <a href="/cart.html" class="cart-link" data-auth-show style="display:none">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="nav-label">Cart</span>
+          <span class="cart-badge" style="display:none">0</span>
+        </a>
+        <a href="/orders.html" data-auth-show style="display:none"><span class="nav-label">Orders</span></a>
+        <a href="/profile.html" data-auth-show style="display:none">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="nav-label" data-user-name>Account</span>
+        </a>
+        <a href="/login.html" data-guest-show><span class="nav-label">Sign In</span></a>
+        <a href="/register.html" class="btn btn-primary btn-sm" data-guest-show>Register</a>
+        <a href="/admin/dashboard.html" class="btn btn-ghost btn-sm" data-admin-show style="display:none">Admin</a>
+      </nav>
+      <button class="btn-menu" id="menu-toggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav-inner">
+    <a href="/index.html" class="logo" style="margin-bottom:20px;display:block">shop<span style="color:var(--c-brand)">X</span></a>
+    <a href="/products.html">🛍️ Products</a>
+    <a href="/cart.html" data-auth-show style="display:none">🛒 Cart</a>
+    <a href="/orders.html" data-auth-show style="display:none">📦 My Orders</a>
+    <a href="/profile.html" data-auth-show style="display:none">👤 Profile</a>
+    <a href="/login.html" data-guest-show>🔑 Sign In</a>
+    <a href="/register.html" data-guest-show>✨ Register</a>
+    <a href="/admin/dashboard.html" data-admin-show style="display:none">⚙️ Admin</a>
+    <a href="#" data-logout data-auth-show style="display:none">🚪 Logout</a>
+  </div>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-tag">✨ New Arrivals Every Day</div>
+      <h1>Shop <em>Everything</em><br>You Love</h1>
+      <p>Discover millions of products from electronics to fashion — all at unbeatable prices, delivered fast.</p>
+      <div class="hero-cta">
+        <a href="/products.html" class="btn btn-primary btn-lg">Shop Now</a>
+        <a href="/products.html?category=electronics" class="btn btn-outline btn-lg" style="color:white;border-color:rgba(255,255,255,.4)">Explore Deals</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">10K+</div>
+          <div class="hero-stat-label">Products</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">50K+</div>
+          <div class="hero-stat-label">Customers</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">99%</div>
+          <div class="hero-stat-label">Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Categories -->
+<section class="section" style="background:white">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Shop by Category</h2>
+      <a href="/products.html" class="section-link">See All →</a>
+    </div>
+    <div class="category-grid" id="home-categories"></div>
+  </div>
+</section>
+
+<!-- Featured Products -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">⭐ Featured Products</h2>
+      <a href="/products.html" class="section-link">View All →</a>
+    </div>
+    <div class="products-grid" id="featured-products"></div>
+  </div>
+</section>
+
+<!-- More Products -->
+<section class="section" style="background:white">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">🔥 Latest Arrivals</h2>
+      <a href="/products.html" class="section-link">See All →</a>
+    </div>
+    <div class="products-grid" id="latest-products"></div>
+  </div>
+</section>
+
+<!-- Value Props -->
+<section class="section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px">
+      <div style="text-align:center;padding:32px 20px;background:white;border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,.08)">
+        <div style="font-size:2.5rem;margin-bottom:12px">🚚</div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:6px">Fast Delivery</h3>
+        <p style="font-size:13px;color:#6b7280">Free shipping on orders over $50</p>
+      </div>
+      <div style="text-align:center;padding:32px 20px;background:white;border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,.08)">
+        <div style="font-size:2.5rem;margin-bottom:12px">🔒</div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:6px">Secure Payment</h3>
+        <p style="font-size:13px;color:#6b7280">100% secure transactions</p>
+      </div>
+      <div style="text-align:center;padding:32px 20px;background:white;border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,.08)">
+        <div style="font-size:2.5rem;margin-bottom:12px">↩️</div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:6px">Easy Returns</h3>
+        <p style="font-size:13px;color:#6b7280">30-day hassle-free returns</p>
+      </div>
+      <div style="text-align:center;padding:32px 20px;background:white;border-radius:20px;box-shadow:0 1px 3px rgba(0,0,0,.08)">
+        <div style="font-size:2.5rem;margin-bottom:12px">💬</div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:6px">24/7 Support</h3>
+        <p style="font-size:13px;color:#6b7280">Always here to help you</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">shop<span>X</span></div>
+        <p>Your one-stop destination for everything you love. Quality products, unbeatable prices, fast delivery.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Shop</div>
+        <a href="/products.html">All Products</a>
+        <a href="/products.html?category=electronics">Electronics</a>
+        <a href="/products.html?category=fashion">Fashion</a>
+        <a href="/products.html?category=home">Home & Living</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Account</div>
+        <a href="/login.html">Sign In</a>
+        <a href="/register.html">Register</a>
+        <a href="/orders.html">My Orders</a>
+        <a href="/profile.html">Profile</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Help</div>
+        <a href="#">FAQ</a>
+        <a href="#">Shipping Info</a>
+        <a href="#">Returns</a>
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 shop-X. All rights reserved.</span>
+      <span>Built with Appwrite + Vanilla JS</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+  import { initAuth, setupLogoutButtons, currentUser } from '/js/auth.js';
+  import { renderProductGrid, setupCardEvents, setupSearchBar } from '/js/products.js';
+  import { handleAddToCart, getCart } from '/js/cart.js';
+  import { fetchFeaturedProducts, getImageUrl } from '/js/appwrite.js';
+  import { CATEGORIES, renderSkeletons, lazyLoadImages, setupMobileMenu, setupStickyHeader, updateCartBadge } from '/js/ui.js';
+
+  let user = null;
+
+  async function init() {
+    setupMobileMenu();
+    setupStickyHeader();
+    user = await initAuth();
+    setupLogoutButtons();
+
+    if (user) {
+      const cart = await getCart(user.$id);
+      updateCartBadge(cart.count);
+    }
+
+    // Categories
+    const catGrid = document.getElementById('home-categories');
+    catGrid.innerHTML = CATEGORIES.map(c =>
+      `<a href="/products.html?category=${c.id}" class="category-tile">
+        <div class="category-tile-icon">${c.icon}</div>
+        <div class="category-tile-name">${c.label}</div>
+      </a>`
+    ).join('');
+
+    // Featured
+    await renderProductGrid('featured-products', {
+      sort: 'newest', limit: 8, skeletons: 8,
+      onAddToCart: async (id, btn) => await handleAddToCart(id, user?.$id, btn)
+    });
+
+    // Latest
+    await renderProductGrid('latest-products', {
+      sort: 'newest', limit: 8, skeletons: 8,
+      onAddToCart: async (id, btn) => await handleAddToCart(id, user?.$id, btn)
+    });
+
+    // Search
+    const searchInput = document.getElementById('header-search-input');
+    const searchBtn = document.getElementById('header-search-btn');
+    const doSearch = () => {
+      const q = searchInput.value.trim();
+      if (q) window.location.href = `/products.html?search=${encodeURIComponent(q)}`;
+    };
+    searchBtn.addEventListener('click', doSearch);
+    searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+  }
+  init();
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders — shop-X</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/index.html" class="logo">shop<span>X</span></a>
+      <nav class="header-nav">
+        <a href="/products.html">Products</a>
+        <a href="/cart.html" class="cart-link" data-auth-show style="display:none">
+          🛒 <span class="cart-badge" style="display:none">0</span>
+        </a>
+        <a href="/orders.html" class="active" data-auth-show style="display:none">Orders</a>
+        <a href="/profile.html" data-auth-show style="display:none"><span data-user-name>Account</span></a>
+        <a href="/login.html" data-guest-show>Sign In</a>
+      </nav>
+      <button class="btn-menu" id="menu-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav-inner">
+    <a href="/index.html">🏠 Home</a>
+    <a href="/products.html">🛍️ Products</a>
+    <a href="/cart.html">🛒 Cart</a>
+    <a href="/orders.html">📦 Orders</a>
+    <a href="/profile.html">👤 Profile</a>
+    <a href="#" data-logout>🚪 Logout</a>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="container">
+    <h1>📦 My Orders</h1>
+    <div class="breadcrumb"><a href="/">Home</a> › Orders</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="container container-sm">
+    <div id="orders-list"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom"><span>© 2025 shop-X. All rights reserved.</span></div>
+  </div>
+</footer>
+
+<script type="module">
+  import { initAuth, setupLogoutButtons } from '/js/auth.js';
+  import { renderOrdersPage } from '/js/orders.js';
+  import { getCart } from '/js/cart.js';
+  import { setupMobileMenu, setupStickyHeader, updateCartBadge } from '/js/ui.js';
+
+  async function init() {
+    setupMobileMenu();
+    setupStickyHeader();
+    const user = await initAuth();
+    setupLogoutButtons();
+    if (user) { const cart = await getCart(user.$id); updateCartBadge(cart.count); }
+    await renderOrdersPage(user?.$id);
+  }
+  init();
+</script>
+</body>
+</html>
