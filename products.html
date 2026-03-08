@@ -3,196 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Products — shop-X</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/components.css">
+  <title>Products — Admin shop-X</title>
+  <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
+<div class="admin-layout">
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="sidebar-logo">shop<span>X</span><span class="admin-badge">Admin Panel</span></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="/admin/dashboard.html"><span class="nav-icon">📊</span> Dashboard</a>
+      <div class="nav-section-label">Catalog</div>
+      <a href="/admin/products.html" class="active"><span class="nav-icon">📦</span> Products</a>
+      <a href="/admin/add-product.html"><span class="nav-icon">➕</span> Add Product</a>
+      <div class="nav-section-label">Sales</div>
+      <a href="/admin/orders.html"><span class="nav-icon">🛒</span> Orders</a>
+      <div class="nav-section-label">Users</div>
+      <a href="/admin/users.html"><span class="nav-icon">👥</span> Users</a>
+      <div class="nav-section-label">Store</div>
+      <a href="/index.html" target="_blank"><span class="nav-icon">🌐</span> View Store</a>
+    </nav>
+    <div class="sidebar-footer"><span data-user-name>Admin</span> • <a href="#" data-logout style="color:rgba(255,255,255,.4)">Logout</a></div>
+  </aside>
 
-<header class="site-header">
-  <div class="container">
-    <div class="header-inner">
-      <a href="/index.html" class="logo">shop<span>X</span></a>
-      <div class="header-search">
-        <input type="text" id="header-search-input" placeholder="Search products..." autocomplete="off">
-        <button class="search-btn" id="header-search-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        </button>
-      </div>
-      <nav class="header-nav">
-        <a href="/products.html" class="active">Products</a>
-        <a href="/cart.html" class="cart-link" data-auth-show style="display:none">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          <span class="nav-label">Cart</span>
-          <span class="cart-badge" style="display:none">0</span>
-        </a>
-        <a href="/profile.html" data-auth-show style="display:none"><span data-user-name>Account</span></a>
-        <a href="/login.html" data-guest-show>Sign In</a>
-        <a href="/register.html" class="btn btn-primary btn-sm" data-guest-show>Register</a>
-      </nav>
-      <button class="btn-menu" id="menu-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-    </div>
-  </div>
-</header>
-
-<div class="mobile-nav" id="mobile-nav">
-  <div class="mobile-nav-inner">
-    <a href="/index.html" class="logo" style="margin-bottom:20px;display:block">shop<span style="color:var(--c-brand)">X</span></a>
-    <a href="/products.html">🛍️ Products</a>
-    <a href="/cart.html" data-auth-show style="display:none">🛒 Cart</a>
-    <a href="/orders.html" data-auth-show style="display:none">📦 My Orders</a>
-    <a href="/profile.html" data-auth-show style="display:none">👤 Profile</a>
-    <a href="/login.html" data-guest-show>🔑 Sign In</a>
-    <a href="#" data-logout data-auth-show style="display:none">🚪 Logout</a>
-  </div>
-</div>
-
-<div class="page-header">
-  <div class="container">
-    <h1>All Products</h1>
-    <div class="breadcrumb"><a href="/index.html">Home</a> › Products</div>
-  </div>
-</div>
-
-<div class="section">
-  <div class="container">
-    <!-- Category chips -->
-    <div class="category-chips" id="cat-filters"></div>
-
-    <div class="products-layout">
-      <!-- Sidebar Filters -->
-      <aside class="sidebar">
-        <div class="sidebar-title">🎛️ Filters</div>
-
-        <div class="filter-group">
-          <div class="filter-group-label">Price Range</div>
-          <div class="price-range-inputs">
-            <input type="number" class="price-input" id="min-price" placeholder="Min" min="0">
-            <span>—</span>
-            <input type="number" class="price-input" id="max-price" placeholder="Max" min="0">
-          </div>
-          <button class="btn btn-ghost btn-sm" id="apply-price" style="margin-top:10px;width:100%">Apply</button>
-        </div>
-
-        <div class="filter-group">
-          <div class="filter-group-label">Sort By</div>
-          <select class="form-input" id="sidebar-sort" style="padding:8px 12px">
-            <option value="newest">Newest First</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
-          </select>
-        </div>
-
-        <button class="btn btn-outline btn-sm" id="clear-filters" style="width:100%;margin-top:8px">Clear All Filters</button>
-      </aside>
-
-      <!-- Products -->
-      <div class="products-main">
-        <div class="products-toolbar">
-          <span class="results-count" id="results-count">Loading products...</span>
-          <select class="sort-select" id="sort-select">
-            <option value="newest">Newest</option>
-            <option value="price-asc">Price ↑</option>
-            <option value="price-desc">Price ↓</option>
-          </select>
-        </div>
-        <div class="products-grid" id="products-grid"></div>
-        <div id="pagination"></div>
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <span class="topbar-title">Products Management</span>
+      <div class="topbar-user">
+        <div class="topbar-avatar">A</div>
+        <span data-user-name>Admin</span>
       </div>
     </div>
-  </div>
-</div>
 
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-bottom">
-      <span>© 2025 shop-X. All rights reserved.</span>
+    <div class="admin-content">
+      <div class="admin-table-wrap">
+        <div class="table-header">
+          <span class="table-header-title">All Products</span>
+          <a href="/admin/add-product.html" class="btn btn-primary">➕ Add New Product</a>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr><th>Image</th><th>Title</th><th>Category</th><th>Price</th><th>Stock</th><th>Rating</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="products-table-body">
+              <tr><td colspan="7" class="table-loading">Loading products...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  </div>
-</footer>
+  </main>
+</div>
 
 <script type="module">
-  import { initAuth, setupLogoutButtons } from '/js/auth.js';
-  import { renderProductGrid, renderCategoryFilters } from '/js/products.js';
-  import { handleAddToCart, getCart } from '/js/cart.js';
-  import { setupMobileMenu, setupStickyHeader, updateCartBadge, renderPagination, debounce } from '/js/ui.js';
-
-  let user = null;
-  let currentPage = 1;
-  const LIMIT = 16;
-  const params = new URLSearchParams(window.location.search);
-  let filters = {
-    search: params.get('search') || '',
-    category: params.get('category') || '',
-    minPrice: 0, maxPrice: 99999,
-    sort: 'newest', page: 1, limit: LIMIT
-  };
-
-  async function loadProducts() {
-    const result = await renderProductGrid('products-grid', {
-      ...filters, skeletons: LIMIT,
-      onAddToCart: async (id, btn) => await handleAddToCart(id, user?.$id, btn)
-    });
-    if (result) {
-      const count = result.total;
-      document.getElementById('results-count').textContent = `${count} product${count !== 1 ? 's' : ''} found`;
-      renderPagination(document.getElementById('pagination'), currentPage, Math.ceil(count / LIMIT), page => {
-        currentPage = page;
-        filters.page = page;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        loadProducts();
-      });
-    }
-  }
+  import { initAuth, requireAdmin, setupLogoutButtons } from '/js/auth.js';
+  import { renderAdminProducts } from '/js/admin.js';
 
   async function init() {
-    setupMobileMenu();
-    setupStickyHeader();
-    user = await initAuth();
+    await initAuth();
+    if (!requireAdmin()) return;
     setupLogoutButtons();
-    if (user) { const cart = await getCart(user.$id); updateCartBadge(cart.count); }
-
-    // Pre-fill search
-    if (filters.search) document.getElementById('header-search-input').value = filters.search;
-
-    // Category filters
-    renderCategoryFilters('cat-filters', filters.category, cat => {
-      filters.category = cat; filters.page = 1; currentPage = 1;
-      loadProducts();
-    });
-
-    // Sort
-    const sortSel = document.getElementById('sort-select');
-    const sideSort = document.getElementById('sidebar-sort');
-    sortSel.value = filters.sort;
-    sideSort.value = filters.sort;
-    sortSel.addEventListener('change', () => { filters.sort = sortSel.value; sideSort.value = sortSel.value; loadProducts(); });
-    sideSort.addEventListener('change', () => { filters.sort = sideSort.value; sortSel.value = sideSort.value; loadProducts(); });
-
-    // Price filter
-    document.getElementById('apply-price').addEventListener('click', () => {
-      filters.minPrice = parseFloat(document.getElementById('min-price').value) || 0;
-      filters.maxPrice = parseFloat(document.getElementById('max-price').value) || 99999;
-      filters.page = 1; currentPage = 1;
-      loadProducts();
-    });
-
-    // Clear filters
-    document.getElementById('clear-filters').addEventListener('click', () => {
-      filters = { search: '', category: '', minPrice: 0, maxPrice: 99999, sort: 'newest', page: 1, limit: LIMIT };
-      document.getElementById('min-price').value = '';
-      document.getElementById('max-price').value = '';
-      document.getElementById('header-search-input').value = '';
-      loadProducts();
-    });
-
-    // Search
-    const searchInput = document.getElementById('header-search-input');
-    const doSearch = debounce(q => { filters.search = q; filters.page = 1; currentPage = 1; loadProducts(); }, 400);
-    searchInput.addEventListener('input', () => doSearch(searchInput.value.trim()));
-    document.getElementById('header-search-btn').addEventListener('click', () => { filters.search = searchInput.value.trim(); loadProducts(); });
-
-    loadProducts();
+    await renderAdminProducts();
   }
   init();
 </script>

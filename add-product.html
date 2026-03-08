@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Product — Admin shop-X</title>
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="sidebar-logo">shop<span>X</span><span class="admin-badge">Admin Panel</span></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="/admin/dashboard.html"><span class="nav-icon">📊</span> Dashboard</a>
+      <div class="nav-section-label">Catalog</div>
+      <a href="/admin/products.html"><span class="nav-icon">📦</span> Products</a>
+      <a href="/admin/add-product.html" class="active"><span class="nav-icon">➕</span> Add Product</a>
+      <div class="nav-section-label">Sales</div>
+      <a href="/admin/orders.html"><span class="nav-icon">🛒</span> Orders</a>
+      <div class="nav-section-label">Users</div>
+      <a href="/admin/users.html"><span class="nav-icon">👥</span> Users</a>
+      <div class="nav-section-label">Store</div>
+      <a href="/index.html" target="_blank"><span class="nav-icon">🌐</span> View Store</a>
+    </nav>
+    <div class="sidebar-footer"><span data-user-name>Admin</span> • <a href="#" data-logout style="color:rgba(255,255,255,.4)">Logout</a></div>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <span class="topbar-title form-page-title">Add New Product</span>
+      <div class="topbar-user">
+        <div class="topbar-avatar">A</div>
+        <span data-user-name>Admin</span>
+      </div>
+    </div>
+
+    <div class="admin-content">
+      <div class="admin-form-wrap">
+        <div class="admin-form-card">
+          <h2 class="form-page-title">Add New Product</h2>
+
+          <form id="product-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Product Title *</label>
+                <input type="text" name="title" class="form-input" required placeholder="e.g. Wireless Earbuds Pro">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Category *</label>
+                <select name="category" class="form-select" required>
+                  <!-- filled by JS -->
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Description</label>
+              <textarea name="description" class="form-textarea" placeholder="Describe the product in detail..."></textarea>
+            </div>
+
+            <div class="form-row-3">
+              <div class="form-group">
+                <label class="form-label">Price (USD) *</label>
+                <input type="number" name="price" class="form-input" required min="0" step="0.01" placeholder="29.99">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Original Price (USD)</label>
+                <input type="number" name="originalPrice" class="form-input" min="0" step="0.01" placeholder="49.99 (optional)">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Stock Quantity *</label>
+                <input type="number" name="stock" class="form-input" required min="0" placeholder="100">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Rating (0–5)</label>
+                <input type="number" name="rating" class="form-input" min="0" max="5" step="0.1" placeholder="4.5">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Review Count</label>
+                <input type="number" name="reviewCount" class="form-input" min="0" placeholder="128">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Product Image</label>
+              <div class="image-upload-area" onclick="document.getElementById('img-input').click()">
+                <div class="upload-icon">📷</div>
+                <div class="upload-text">Click to upload image</div>
+                <div class="upload-hint">PNG, JPG, WEBP up to 10MB</div>
+              </div>
+              <input type="file" id="img-input" name="imageFile" accept="image/*" style="display:none">
+              <img id="image-preview" alt="Preview" src="" style="display:none">
+            </div>
+
+            <div class="form-error" id="form-error"></div>
+
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+              <button type="submit" class="btn btn-primary">✅ Add Product</button>
+              <a href="/admin/products.html" class="btn btn-ghost">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+  import { initAuth, requireAdmin, setupLogoutButtons } from '/js/auth.js';
+  import { setupProductForm } from '/js/admin.js';
+
+  async function init() {
+    await initAuth();
+    if (!requireAdmin()) return;
+    setupLogoutButtons();
+    await setupProductForm();
+    // Wire file input to hidden input
+    document.getElementById('img-input').addEventListener('change', function() {
+      const preview = document.getElementById('image-preview');
+      if (this.files[0]) {
+        preview.src = URL.createObjectURL(this.files[0]);
+        preview.style.display = 'block';
+      }
+    });
+  }
+  init();
+</script>
+</body>
+</html>
