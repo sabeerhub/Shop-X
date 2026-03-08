@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product — shop-X</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/Css/style.css">
+  <link rel="stylesheet" href="/Css/components.css">
 </head>
 <body>
 
@@ -66,11 +66,11 @@
 </footer>
 
 <script type="module">
-  import { fetchProduct, getImageUrl } from '/js/appwrite.js';
-  import { initAuth, setupLogoutButtons } from '/js/auth.js';
-  import { handleAddToCart, getCart } from '/js/cart.js';
-  import { renderProductGrid } from '/js/products.js';
-  import { renderStars, formatPrice, showToast, setupMobileMenu, setupStickyHeader, updateCartBadge } from '/js/ui.js';
+  import { fetchProduct, getImageUrl } from '/Js/appwrite.js';
+  import { initAuth, setupLogoutButtons } from '/Js/auth.js';
+  import { handleAddToCart, getCart } from '/Js/cart.js';
+  import { renderProductGrid } from '/Js/products.js';
+  import { renderStars, formatPrice, showToast, setupMobileMenu, setupStickyHeader, updateCartBadge } from '/Js/ui.js';
 
   let user = null;
   let product = null;
@@ -176,12 +176,12 @@
         const btn = e.currentTarget;
         if (!user) { window.location.href = `/login.html?redirect=${window.location.pathname}${window.location.search}`; return; }
         btn.disabled = true; btn.textContent = 'Adding...';
-        const { addToCart } = await import('/js/appwrite.js');
-        const { clearCartCache } = await import('/js/cart.js');
+        const { addToCart } = await import('/Js/appwrite.js');
+        const { clearCartCache } = await import('/Js/cart.js');
         try {
           await addToCart(user.$id, product.$id, qty);
           clearCartCache();
-          const { getCart } = await import('/js/cart.js');
+          const { getCart } = await import('/Js/cart.js');
           const cart = await getCart(user.$id);
           updateCartBadge(cart.count);
           showToast(`Added ${qty} item(s) to cart! 🛒`);
@@ -192,8 +192,8 @@
       // Buy now
       document.getElementById('buy-now-btn').addEventListener('click', async () => {
         if (!user) { window.location.href = `/login.html?redirect=/checkout.html`; return; }
-        const { addToCart } = await import('/js/appwrite.js');
-        const { clearCartCache } = await import('/js/cart.js');
+        const { addToCart } = await import('/Js/appwrite.js');
+        const { clearCartCache } = await import('/Js/cart.js');
         await addToCart(user.$id, product.$id, qty);
         clearCartCache();
         window.location.href = '/checkout.html';
